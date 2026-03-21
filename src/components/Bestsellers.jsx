@@ -1,6 +1,6 @@
 import { products } from "../data/products";
 import ProductCard from "./ProductCard";
-import "./bestsellers.css";
+import "./Bestsellers.css";
 
 function Bestsellers(){
 
