@@ -1,0 +1,32 @@
+.bestsellers{
+  padding:60px 40px;
+}
+
+.bestsellers h2{
+  text-align:center;
+  font-size:28px;
+  font-weight:600;
+  margin-bottom:40px;
+}
+
+.bestseller-grid{
+  display:grid;
+  grid-template-columns: repeat(4,1fr);
+  gap:30px;
+}
+
+/* Tablet */
+
+@media(max-width:1000px){
+  .bestseller-grid{
+    grid-template-columns: repeat(2,1fr);
+  }
+}
+
+/* Mobile */
+
+@media(max-width:600px){
+  .bestseller-grid{
+    grid-template-columns:1fr;
+  }
+}

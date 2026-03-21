@@ -1,0 +1,73 @@
+.login-page{
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+background:#f4f4f4;
+}
+
+.login-card{
+width:350px;
+background:white;
+padding:30px;
+border-radius:10px;
+box-shadow:0 10px 25px rgba(0,0,0,0.1);
+}
+
+.login-card h2{
+margin-bottom:20px;
+color:#0b2a4a;
+}
+
+.phone-input{
+display:flex;
+align-items:center;
+border:1px solid #d1d5db;
+padding:12px;
+border-radius:5px;
+margin-bottom:20px;
+}
+
+.phone-input span{
+margin-right:10px;
+color:#6b7280;
+}
+
+.phone-input input{
+border:none;
+outline:none;
+flex:1;
+font-size:16px;
+}
+
+
+.otp-input{
+width:100%;
+padding:12px;
+border:1px solid #d1d5db;
+border-radius:5px;
+margin-bottom:20px;
+}
+
+
+
+.continue-btn{
+width:100%;
+padding:12px;
+background:#0b2a4a;
+color:white;
+border:none;
+border-radius:5px;
+font-weight:600;
+cursor:pointer;
+}
+
+.continue-btn:hover{
+background:#081f36;
+}
+
+.otp-note{
+margin-top:10px;
+font-size:13px;
+color:#777;
+}
