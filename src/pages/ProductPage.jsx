@@ -9,24 +9,24 @@ function ProductPage() {
 
   const product = products.find((p) => p.id === Number(id));
 
-  if (!product) return <h2>Product not found</h2>;
+  if (!product) return <h2 style={{ padding: "120px" }}>Product not found</h2>;
 
   return (
     <div className="product-page">
 
-      {/* LEFT IMAGE */}
+      {/* LEFT */}
       <div className="product-left">
         <img src={product.image} alt={product.name} />
       </div>
 
-      {/* RIGHT DETAILS */}
+      {/* RIGHT */}
       <div className="product-right">
 
         <h1 className="title">{product.name}</h1>
 
-        {/*  RATING */}
+        {/* RATING */}
         <div className="rating">
-           {product.rating} ({product.reviews} reviews)
+          ⭐ {product.rating} ({product.reviews} reviews)
         </div>
 
         {/* BRAND */}
@@ -51,7 +51,10 @@ function ProductPage() {
 
         {/* BUTTONS */}
         <div className="product-buttons">
-          <button className="add-cart" onClick={() => addToCart(product)}>
+          <button
+            className="add-cart"
+            onClick={() => addToCart(product)}
+          >
             Add to Cart
           </button>
 
