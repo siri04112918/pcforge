@@ -1,0 +1,38 @@
+/* PAGE */
+.shop-page {
+  padding: 40px 60px;
+  background: #f9f9f9;
+  min-height: calc(100vh - 160px);
+}
+
+/* HEADER */
+.shop-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.shop-header h2 {
+  font-size: 34px;
+  font-weight: 700;
+  color: #222;
+}
+
+.shop-header .underline {
+  width: 60px;
+  height: 4px;
+  background: #8b5e3c;
+  display: block;
+  margin: 10px auto;
+  border-radius: 2px;
+}
+
+.shop-header p {
+  color: #666;
+  font-size: 16px;
+}
+
+/* PRODUCT SECTION */
+.shop-content {
+  max-width: 1200px;
+  margin: auto;
+}

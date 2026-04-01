@@ -1,30 +1,58 @@
 import { products } from "../data/products";
 import ProductCard from "./ProductCard";
-import { useParams } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 import "./Product.css";
 
 function ProductList() {
 
   const { category } = useParams();
+  const location = useLocation();
 
-  const filteredProducts = category
-    ? products.filter(
-        (product) =>
-          product.category.toLowerCase() === category.toLowerCase()
-      )
-    : products;
+  
+  const searchQuery =
+    new URLSearchParams(location.search).get("search")?.toLowerCase() || "";
+
+  
+  const filteredProducts = products.filter((product) => {
+
+    
+    const matchesCategory = category
+      ? product.category.toLowerCase() === category.toLowerCase()
+      : true;
+
+  
+    const matchesSearch =
+      product.name.toLowerCase().includes(searchQuery) ||
+      (product.desc && product.desc.toLowerCase().includes(searchQuery));
+
+    return matchesCategory && matchesSearch;
+  });
 
   return (
-    <div className="products-container">
+    <div className="section-header-center">
 
-      {filteredProducts.length === 0 ? (
-        <h2>No products found</h2>
-      ) : (
-        filteredProducts.map((product) => (
-          <ProductCard key={product.id} product={product} />
-        ))
-      )}
+      <h2>
+        {category
+          ? `${category.toUpperCase()} PRODUCTS`
+          : searchQuery
+          ? `Results for "${searchQuery}"`
+          : "Explore Products"}
+      </h2>
 
+      <span className="underline"></span>
+      <p>Find the best gear for your setup</p>
+
+      <div className="products-grid">
+
+        {filteredProducts.length === 0 ? (
+          <h2>No products found </h2>
+        ) : (
+          filteredProducts.map((product) => (
+            <ProductCard key={product.id} product={product} />
+          ))
+        )}
+
+      </div>
     </div>
   );
 }

@@ -1,77 +1,92 @@
 import { Routes, Route } from "react-router-dom";
 import { useEffect } from "react";
-import Lenis from "lenis";
 
-import ProductPage from "./pages/ProductPage";
-import Profile from "./pages/Profile";
+import Shop from "./pages/Shop";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import Bestsellers from "./components/Bestsellers";
-import ProductList from "./components/ProductList";
 import Categories from "./components/Categories";
+import ProductList from "./components/ProductList";
 import CartDrawer from "./components/CartDrawer";
-import Checkout from "./pages/Checkout";
-import Login from "./pages/Login";
-import "./App.css";
-import PhoneLogin from "./PhoneLogin";
 import Footer from "./components/Footer";
+import Checkout from "./pages/Checkout";
+import ProductPage from "./pages/ProductPage";
+import Profile from "./pages/Profile";
+import Login from "./pages/Login";
 import Wishlist from "./pages/Wishlist";
 import Orders from "./pages/Orders";
-import Shop from "./pages/Shop";
+import Promo from "./components/Promo";
+import ScrollToTop from "./components/ScrollToTop";
+
+import "./App.css";
 
 function App() {
 
-  // ✅ SMOOTH SCROLL (Lenis)
-  useEffect(() => {
-    const lenis = new Lenis({
-      duration: 1.2,   // smoothness
-      smooth: true,
-    });
-
-    function raf(time) {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
-    }
-
-    requestAnimationFrame(raf);
-  }, []);
-
   return (
-    <div>
+    <div className="app"> 
 
       <Navbar />
-
+      <ScrollToTop />
       <CartDrawer />
 
-      <Routes>
+      
+      <div className="main-content">
 
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/search/:query" element={<ProductList />} />
-        <Route path="/wishlist" element={<Wishlist />} />
-        <Route path="/orders" element={<Orders />} />
-        <Route path="/category/:type" element={<Categories />} />
+        <Routes>
 
-        <Route
-          path="/"
-          element={
-            <>
-              <Hero />
-              <Bestsellers />
-              <Categories />
-              <ProductList />
-              <Footer />
-            </>
-          }
-        />
+          {/* HOME */}
+          <Route
+            path="/"
+            element={
+              <>
+                <Hero />
 
-        <Route path="/category/:category" element={<ProductList />} />
+                <div className="container">
+                  <Bestsellers />
+                  <Promo />
+                  <Categories />
+                  <ProductList />
+                </div>
+              </>
+            }
+          />
 
-        <Route path="/checkout" element={<Checkout />} />
+          {/* SHOP */}
+          <Route
+            path="/shop"
+            element={
+              <div className="container">
+                <Shop />
+              </div>
+            }
+          />
 
-        <Route path="/product/:id" element={<ProductPage />} />
+          {/* CATEGORY */}
+          <Route
+            path="/category/:category"
+            element={
+              <div className="container">
+                <ProductList />
+              </div>
+            }
+          />
 
-      </Routes>
+          {/* PRODUCT */}
+          <Route path="/product/:id" element={<ProductPage />} />
+
+          {/* OTHER */}
+          <Route path="/checkout" element={<Checkout />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/wishlist" element={<Wishlist />} />
+          <Route path="/orders" element={<Orders />} />
+
+        </Routes>
+
+      </div>
+
+      
+      <Footer />
 
     </div>
   );

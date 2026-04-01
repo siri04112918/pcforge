@@ -1,0 +1,95 @@
+.profile-page {
+  min-height: 100vh;
+  padding: 100px 20px 40px;
+  background: #f5f3ef;
+
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.profile-card {
+  width: 100%;
+  max-width: 420px;
+
+  background: white;
+  padding: 30px;
+  border-radius: 16px;
+
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  text-align: center;
+
+  transition: 0.3s ease;
+}
+
+.profile-card h2 {
+  margin-bottom: 20px;
+  font-size: 22px;
+}
+
+.profile-card p {
+  font-size: 14px;
+  color: #555;
+}
+
+.profile-actions {
+  margin-top: 15px;
+}
+
+.profile-card button {
+  width: 100%;
+  margin-top: 12px;
+  padding: 12px;
+
+  border: none;
+  border-radius: 10px;
+
+  background: #8b5e3c;
+  color: white;
+
+  font-size: 14px;
+  font-weight: 500;
+
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.profile-card button:hover {
+  background: #a06a45;
+  transform: translateY(-1px);
+}
+
+@media (max-width: 480px) {
+
+  .profile-page {
+    padding: 90px 15px 20px;
+  }
+
+  .profile-card {
+    padding: 20px;
+    border-radius: 12px;
+  }
+
+  .profile-card h2 {
+    font-size: 20px;
+  }
+
+  .profile-card button {
+    padding: 11px;
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 768px) {
+
+  .profile-card {
+    max-width: 90%;
+  }
+}
+
+@media (min-width: 1200px) {
+
+  .profile-card {
+    max-width: 450px;
+  }
+}

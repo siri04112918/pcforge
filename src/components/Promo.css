@@ -1,0 +1,118 @@
+/* SECTION */
+.promo {
+  background: #f5f1eb;
+  padding: 60px 80px 40px;
+}
+
+/* FLEX LAYOUT */
+.promo-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+}
+
+/* LEFT */
+.promo-left {
+  flex: 1;
+  max-width: 520px;
+}
+
+.brand {
+  font-size: 16px;
+  letter-spacing: 3px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: #222;
+}
+
+.promo-left h1 {
+  font-size: 48px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  line-height: 1.2;
+}
+
+.tagline {
+  font-size: 18px;
+  color: #8a5a3c;
+  margin-bottom: 25px;
+}
+
+/* BUTTONS */
+.promo-buttons {
+  display: flex;
+  gap: 15px;
+}
+
+.promo-buttons button {
+  padding: 10px 22px;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.outline {
+  border: 1px solid #333;
+  background: transparent;
+}
+
+.filled {
+  background: #333;
+  color: #fff;
+  border: none;
+}
+
+/* RIGHT */
+.promo-right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* IMAGE */
+.promo-right img {
+  width: 650px;
+  max-width: none;
+  object-fit: contain;
+  display: block;
+}
+
+/* 🔥 LINKS (PERFECT FIX) */
+.promo-links {
+  margin-top: 15px;
+  font-size: 15px;
+  color: #444;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+}
+
+.promo-links span {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+/* DOT BETWEEN ITEMS ONLY */
+.promo-links span + span::before {
+  content: "•";
+  margin-right: 12px;
+  color: #666;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .promo-inner {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .promo-right img {
+    width: 100%;
+    margin-top: 20px;
+  }
+}

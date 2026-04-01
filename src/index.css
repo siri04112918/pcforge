@@ -3,6 +3,7 @@ body {
   background: #f5f3ef;
   color: #1a1a1a;
   font-family: 'Inter', Arial, Helvetica, sans-serif;
+  overflow-x: hidden;
 }
 a {
   text-decoration: none;
@@ -14,4 +15,9 @@ a {
 }
 html {
   scroll-behavior: smooth;
+}
+.container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 0 20px;
 }

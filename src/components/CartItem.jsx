@@ -1,25 +1,33 @@
-<div key={item.id} className="cart-item">
+function CartItem({ item, onRemove, onIncrease, onDecrease }) {
+  return (
+    <div className="cart-item">
 
-  <img src={item.image} alt={item.name} />
+      <img src={item.image} alt={item.name} />
 
-  <div className="cart-item-info">
-    <p>{item.name}</p>
-    <p>₹{item.price}</p>
+      <div className="cart-info">
+        <h4>{item.name}</h4>
+        <p className="price">₹{item.price}</p>
 
-    <div className="qty-controls">
+        <div className="cart-actions">
 
-      <button onClick={() => decreaseQty(item.id)}>
-        🗑
-      </button>
+          <button
+            className="icon-btn"
+            onClick={() => onRemove(item.id)}
+          >
+            🗑
+          </button>
 
-      <span>{item.qty}</span>
+          <div className="qty-box">
+            <button onClick={() => onDecrease(item.id)}>-</button>
+            <span>{item.qty}</span>
+            <button onClick={() => onIncrease(item.id)}>+</button>
+          </div>
 
-      <button onClick={() => increaseQty(item.id)}>
-        +
-      </button>
+        </div>
+      </div>
 
     </div>
+  );
+}
 
-  </div>
-
-</div>
+export default CartItem;

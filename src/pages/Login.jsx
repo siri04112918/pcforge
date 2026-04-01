@@ -3,102 +3,57 @@ import { useNavigate } from "react-router-dom";
 import "./Login.css";
 
 function Login() {
+  const [input, setInput] = useState("");
 
-  const [phone, setPhone] = useState("");
-  const [otp, setOtp] = useState("");
-  const [step, setStep] = useState(1);
-
-  const navigate = useNavigate();
-
-  const handleSendOtp = () => {
-    if (phone.length === 10) {
-      setStep(2);
-    } else {
-      alert("Enter valid mobile number");
-    }
-  };
-
-  const handleVerifyOtp = () => {
-
-    if (otp === "1234") {
-
-      localStorage.setItem("userLoggedIn", "true");
-      navigate("/");
-
-    } else {
-
-      alert("Invalid OTP");
-
+  const handleContinue = () => {
+    if (!input) {
+      alert("Please enter email or mobile number");
+      return;
     }
 
+    localStorage.setItem("userLoggedIn", true);
+    window.location.href = "/";
   };
 
   return (
-
     <div className="login-page">
+      {/* LOGO */}
+      <h1 className="login-logo">PCForge</h1>
 
+      {/* CARD */}
       <div className="login-card">
+        <h2>Sign in or create account</h2>
 
-    
+        <label>Enter mobile number or email</label>
+        <input
+          type="text"
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+        />
 
-        {step === 1 && (
-          <>
-            <h2>Login or Signup</h2>
+        <button className="continue-btn" onClick={handleContinue}>
+          Continue
+        </button>
 
-            <div className="phone-input">
+        <p className="terms">
+          By continuing, you agree to PCForge's{" "}
+          <span>Conditions of Use</span> and <span>Privacy Notice</span>.
+        </p>
 
-              <span>+91</span>
+        <hr />
 
-              <input
-                type="text"
-                placeholder="Mobile Number"
-                value={phone}
-                onChange={(e) => setPhone(e.target.value)}
-              />
-
-            </div>
-
-            <button
-              className="continue-btn"
-              onClick={handleSendOtp}
-            >
-              CONTINUE
-            </button>
-          </>
-        )}
-
-
-        {step === 2 && (
-          <>
-            <h2>Verify OTP</h2>
-
-            <p>OTP sent to +91 {phone}</p>
-
-            <input
-              className="otp-input"
-              type="text"
-              placeholder="Enter OTP"
-              value={otp}
-              onChange={(e) => setOtp(e.target.value)}
-            />
-
-            <button
-              className="continue-btn"
-              onClick={handleVerifyOtp}
-            >
-              VERIFY OTP
-            </button>
-
-            <p className="otp-note">
-              Use OTP: <b>1234</b>
-            </p>
-          </>
-        )}
-
+        <h4>Buying for work?</h4>
+        <p className="business">Create a free business account</p>
       </div>
 
+      {/* FOOTER */}
+      <div className="login-footer">
+        <span>Conditions of Use</span>
+        <span>Privacy Notice</span>
+        <span>Help</span>
+        <p>© 2026 PCForge.com</p>
+      </div>
     </div>
-
   );
 }
 

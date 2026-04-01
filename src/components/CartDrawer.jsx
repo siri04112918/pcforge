@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useCart } from "../context/CartContext";
 import "./CartDrawer.css";
+import CartItem from "./CartItem";
 
 export default function CartDrawer() {
 
@@ -10,7 +11,8 @@ export default function CartDrawer() {
     isCartOpen,
     setIsCartOpen,
     increaseQty,
-    decreaseQty
+    decreaseQty,
+    removeFromCart
   } = useCart();
 
   const navigate = useNavigate();
@@ -23,7 +25,6 @@ export default function CartDrawer() {
           onClick={() => setIsCartOpen(false)}
         />
       )}
-
 
       <div className={`cart-drawer ${isCartOpen ? "open" : ""}`}>
 
@@ -38,44 +39,19 @@ export default function CartDrawer() {
             <p>Your cart is empty</p>
           ) : (
             cart.map((item) => (
-              <div key={item.id} className="cart-item">
-
-                <img src={item.image} alt={item.name} />
-
-                <div className="cart-info">
-                  <p>{item.name}</p>
-                  <p>₹{item.price}</p>
-
-    
-                  <div className="qty-controls">
-
-                    <button
-                      onClick={() => decreaseQty(item.id)}
-                    >
-                      🗑
-                    </button>
-
-                    <span>{item.qty}</span>
-
-                    <button
-                      onClick={() => increaseQty(item.id)}
-                    >
-                      +
-                    </button>
-
-                  </div>
-
-                </div>
-
-              </div>
+              <CartItem
+                key={item.id}
+                item={item}
+                onRemove={removeFromCart}
+                onIncrease={increaseQty}
+                onDecrease={decreaseQty}
+              />
             ))
           )}
 
         </div>
 
-    
         <div className="cart-footer">
-
           <h3>Total: ₹{total}</h3>
 
           <button
@@ -87,7 +63,6 @@ export default function CartDrawer() {
           >
             Checkout
           </button>
-
         </div>
 
       </div>

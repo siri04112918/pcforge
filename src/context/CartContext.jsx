@@ -8,28 +8,26 @@ export function CartProvider({ children }) {
   const [isCartOpen, setIsCartOpen] = useState(false);
 
   const addToCart = (product) => {
+  setCart((prevCart) => {
+    const existing = prevCart.find(item => item.id === product.id);
 
-    const existing = cart.find(item => item.id === product.id);
-
-    if(existing){
-      setCart(
-        cart.map(item =>
-          item.id === product.id
-            ? { ...item, qty: item.qty + 1 }
-            : item
-        )
+    if (existing) {
+      return prevCart.map(item =>
+        item.id === product.id
+          ? { ...item, qty: item.qty + 1 }
+          : item
       );
+    } else {
+      return [...prevCart, { ...product, qty: 1 }];
     }
-    else{
-      setCart([...cart, { ...product, qty: 1 }]);
-    }
+  });
 
-    setIsCartOpen(true);
-  };
+  setIsCartOpen(true);
+};
 
   const increaseQty = (id) => {
-    setCart(
-      cart.map(item =>
+    setCart((prev) =>
+      prev.map(item =>
         item.id === id
           ? { ...item, qty: item.qty + 1 }
           : item
@@ -38,17 +36,23 @@ export function CartProvider({ children }) {
   };
 
   const decreaseQty = (id) => {
-    setCart(
-      cart.map(item =>
-        item.id === id
-          ? { ...item, qty: item.qty - 1 }
-          : item
-      ).filter(item => item.qty > 0)
+    setCart((prev) =>
+      prev
+        .map(item =>
+          item.id === id
+            ? { ...item, qty: item.qty - 1 }
+            : item
+        )
+        .filter(item => item.qty > 0)
     );
   };
 
+  const removeFromCart = (id) => {
+    setCart((prev) => prev.filter(item => item.id !== id));
+  };
+
   const total = cart.reduce(
-    (sum,item) => sum + item.price * item.qty,
+    (sum, item) => sum + item.price * item.qty,
     0
   );
 
@@ -58,6 +62,7 @@ export function CartProvider({ children }) {
       addToCart,
       increaseQty,
       decreaseQty,
+      removeFromCart,
       total,
       isCartOpen,
       setIsCartOpen

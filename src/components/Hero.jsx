@@ -1,42 +1,90 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./Hero.css";
 
+const slides = [
+  {
+    title: "Upgrade Your Setup",
+    text: "Premium keyboards, mouse & monitors",
+    image: "/images/setup.jpg",
+  },
+  {
+    title: "Gaming Mouse",
+    text: "Precision and speed",
+    image: "/images/mouse1.png",
+  },
+  {
+    title: "Ultra HD Monitor",
+    text: "Experience clarity",
+    image: "/images/monitor1.jpg",
+  },
+];
+
 function Hero() {
+  const [current, setCurrent] = useState(0);
+
+  // AUTO SLIDE (5 sec)
+  useEffect(() => {
+    const interval = setInterval(() => {
+      nextSlide();
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, [current]);
+
+  const nextSlide = () => {
+    setCurrent((prev) => (prev + 1) % slides.length);
+  };
+
+  const prevSlide = () => {
+    setCurrent((prev) =>
+      prev === 0 ? slides.length - 1 : prev - 1
+    );
+  };
+
   return (
-    <section className="hero-premium">
+    <section className="hero">
 
-      {/* LEFT */}
-      <div className="hero-left">
-        <h1>
-          Build Your <br />
-          <span>Setup</span>
-        </h1>
+      {slides.map((slide, index) => {
+        let className = "slide";
 
-        <p>
-          Premium keyboards, mice & monitors for your perfect workspace
-        </p>
+        if (index === current) className += " active";
+        else if (
+          index === current - 1 ||
+          (current === 0 && index === slides.length - 1)
+        ) {
+          className += " prev";
+        }
 
-        <div className="hero-buttons">
-          <button className="primary-btn">Shop Now</button>
-          <button className="secondary-btn">Explore</button>
-        </div>
-      </div>
+        return (
+          <div
+            key={index}
+            className={className}
+            style={{ backgroundImage: `url(${slide.image})` }}
+          >
+            <div className="overlay"></div>
 
-      {/* RIGHT */}
-      <div className="hero-right">
+            <div className="content">
+              <h1>{slide.title}</h1>
+              <p>{slide.text}</p>
+              <button>Shop Now</button>
+            </div>
+          </div>
+        );
+      })}
 
-        <div className="card card1">
-          <img src="/images/keyboard.jpg" alt="keyboard" />
-        </div>
+      {/* ARROWS */}
+      <button className="arrow left" onClick={prevSlide}>❮</button>
+      <button className="arrow right" onClick={nextSlide}>❯</button>
 
-        <div className="card card2">
-          <img src="/images/mouse.jpg" alt="mouse" />
-        </div>
-
-        <div className="card card3">
-          <img src="/images/monitor.jpg" alt="monitor" />
-        </div>
-
+      {/* DOTS */}
+      <div className="dots">
+        {slides.map((_, i) => (
+          <span
+            key={i}
+            className={i === current ? "dot active" : "dot"}
+            onClick={() => setCurrent(i)}
+          />
+        ))}
       </div>
 
     </section>

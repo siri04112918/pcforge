@@ -1,22 +1,50 @@
-import React from "react";
+import { useNavigate } from "react-router-dom";
+import "./Profile.css";
 
 function Profile() {
+  const navigate = useNavigate();
+  const isLoggedIn = localStorage.getItem("userLoggedIn");
+
+  const handleLogout = () => {
+    localStorage.removeItem("userLoggedIn");
+    navigate("/");
+  };
+
   return (
-    <div style={{padding:"40px"}}>
+    <div className="profile-page">
+      <div className="profile-card">
 
-      <h2>My Profile</h2>
+        <h2>My Account</h2>
 
-      <p>Name: Sai</p>
-      <p>Email: sai@email.com</p>
+        {!isLoggedIn ? (
+          <>
+            <p>You are not logged in</p>
 
-      <h3>My Orders</h3>
-      <p>No orders yet</p>
+            <button onClick={() => navigate("/login")}>
+              Login
+            </button>
+          </>
+        ) : (
+          <>
+            <p>Welcome back </p>
 
-      <h3>Wishlist</h3>
-      <p>No items in wishlist</p>
+            <div className="profile-actions">
+              <button onClick={() => navigate("/orders")}>
+                My Orders
+              </button>
 
-      <button>Logout</button>
+              <button onClick={() => navigate("/wishlist")}>
+                Wishlist
+              </button>
 
+              <button onClick={handleLogout}>
+                Logout
+              </button>
+            </div>
+          </>
+        )}
+
+      </div>
     </div>
   );
 }
