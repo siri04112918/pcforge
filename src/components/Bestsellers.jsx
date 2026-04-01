@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { products } from "../data/products";
-import "./Bestsellers.css";
+import "./bestsellers.css";
 
 function Bestsellers() {
   const navigate = useNavigate();
