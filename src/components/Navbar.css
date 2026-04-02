@@ -9,8 +9,7 @@ a {
   text-decoration: none;
   color: inherit;
 }
-
-/* NAVBAR */
+ 
 .navbar {
   display: flex;
   align-items: center;
@@ -30,7 +29,7 @@ a {
   z-index: 1000;
 }
 
-/* LOGO */
+
 .brand {
   display: flex;
   flex-direction: column;
@@ -57,11 +56,14 @@ a {
   color: #0b2a4a;
 }
 
-/* NAV LINKS */
+
 .nav-links {
   display: flex;
-  gap: 30px;
+  gap: 25px;
   list-style: none;
+}
+.close-btn {
+  display: none;
 }
 
 .nav-item {
@@ -86,7 +88,7 @@ a {
   width: 100%;
 }
 
-/* MEGA MENU */
+
 .mega-menu {
   position: absolute;
   top: 55px;
@@ -335,23 +337,64 @@ a {
 @media (max-width: 1024px) {
   .search-box {
     width: 180px;
+    display: none;
   }
 }
-
 @media (max-width: 768px) {
+  .close-btn {
+    display: block;
+    font-size: 22px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-bottom: 20px;
+  }
+
+  .pc-text {
+    font-size: 22px;
+  }
+
+  .forge-text {
+    font-size: 16px;
+  }
+
   .nav-links {
-    display: none;
+
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 250px;
+    height: 100%;
+    background: #fff;
+    flex-direction: column;
+    padding: 80px 20px;
+    gap: 20px;
+
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+
+    z-index: 1000;
+
+
   }
 
-  .search-box {
-    display: none;
-  }
-
-  .icons {
-    gap: 12px;
+  .nav-links.active {
+    transform: translateX(0);
   }
 
   .menu-toggle {
     display: block;
+    font-size: 22px;
+    cursor: pointer;
   }
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.4);
+  z-index: 999;
 }

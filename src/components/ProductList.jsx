@@ -3,36 +3,56 @@ import ProductCard from "./ProductCard";
 import { useParams, useLocation } from "react-router-dom";
 import "./Product.css";
 
-function ProductList() {
+function ProductList({ category: selectedCategory, brands = [], sort = "default" }) {
 
   const { category } = useParams();
   const location = useLocation();
 
-  
+
   const searchQuery =
     new URLSearchParams(location.search).get("search")?.toLowerCase() || "";
 
-  
-  const filteredProducts = products.filter((product) => {
+  let filteredProducts = products
+    .filter((product) => {
 
-    
-    const matchesCategory = category
-      ? product.category.toLowerCase() === category.toLowerCase()
-      : true;
+      const matchesCategory =
+        selectedCategory && selectedCategory !== "all"
+          ? product.category.toLowerCase() === selectedCategory.toLowerCase()
+          : category
+          ? product.category.toLowerCase() === category.toLowerCase()
+          : true;
 
-  
-    const matchesSearch =
-      product.name.toLowerCase().includes(searchQuery) ||
-      (product.desc && product.desc.toLowerCase().includes(searchQuery));
+      
+      const matchesSearch =
+        product.name.toLowerCase().includes(searchQuery) ||
+        (product.desc &&
+          product.desc.toLowerCase().includes(searchQuery));
 
-    return matchesCategory && matchesSearch;
-  });
+      
+      const matchesBrand =
+        brands.length === 0 ? true : brands.includes(product.brand);
+
+      return matchesCategory && matchesSearch && matchesBrand;
+    });
+
+  if (sort === "low-high") {
+    filteredProducts = [...filteredProducts].sort(
+      (a, b) => a.price - b.price
+    );
+  } else if (sort === "high-low") {
+    filteredProducts = [...filteredProducts].sort(
+      (a, b) => b.price - a.price
+    );
+  }
 
   return (
     <div className="section-header-center">
 
+     
       <h2>
-        {category
+        {selectedCategory && selectedCategory !== "all"
+          ? `${selectedCategory.toUpperCase()} PRODUCTS`
+          : category
           ? `${category.toUpperCase()} PRODUCTS`
           : searchQuery
           ? `Results for "${searchQuery}"`

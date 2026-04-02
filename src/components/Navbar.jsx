@@ -21,7 +21,7 @@ function Navbar() {
   const navigate = useNavigate();
   const timeoutRef = useRef(null);
 
-  // 🔥 MEGA MENU HANDLERS
+  
   const handleMenuEnter = (menu) => {
     if (timeoutRef.current) clearTimeout(timeoutRef.current);
     setActiveMenu(menu);
@@ -35,13 +35,14 @@ function Navbar() {
 
   return (
     <nav className="navbar">
+      {menuOpen && (
+  <div className="overlay" onClick={() => setMenuOpen(false)}></div>
+)}
 
-      {/* MOBILE MENU */}
       <div className="menu-toggle" onClick={() => setMenuOpen(!menuOpen)}>
         <FaBars />
       </div>
 
-      {/* LOGO */}
       <Link to="/" className="brand">
         <div className="pc-text">
           <span className="p">P</span>
@@ -52,6 +53,9 @@ function Navbar() {
 
       {/* NAV LINKS */}
       <ul className={`nav-links ${menuOpen ? "active" : ""}`}>
+        <li className="close-btn" onClick={() => setMenuOpen(false)}>
+  ✕
+</li>
 
         {/* ALL PRODUCTS */}
         <li
