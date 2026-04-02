@@ -7,6 +7,9 @@ export function CartProvider({ children }) {
   const [cart, setCart] = useState([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
 
+  const openCart = () => setIsCartOpen(true);
+  const closeCart =() => setIsCartOpen(false);
+
   const addToCart = (product) => {
   setCart((prevCart) => {
     const existing = prevCart.find(item => item.id === product.id);
@@ -60,6 +63,8 @@ export function CartProvider({ children }) {
     <CartContext.Provider value={{
       cart,
       addToCart,
+      openCart,
+      closeCart,
       increaseQty,
       decreaseQty,
       removeFromCart,

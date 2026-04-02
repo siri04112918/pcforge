@@ -91,14 +91,14 @@
   color: #dc2626;
 }
 
-/* DELIVERY */
+
 .delivery {
   font-size: 13px;
   margin: 12px 0;
   color: #555;
 }
 
-/* DESC */
+
 .desc {
   font-size: 14px;
   margin: 15px 0 25px;
@@ -106,15 +106,16 @@
   color: #444;
 }
 
-/* BUTTONS */
+
 .product-buttons {
   display: flex;
   gap: 15px;
 }
 
-/* BUTTON BASE */
 .add-cart,
-.buy-now {
+.buy-now,
+.going-to-bag {
+  width: 100%;
   padding: 14px 22px;
   border: none;
   border-radius: 10px;
@@ -123,7 +124,7 @@
   transition: all 0.25s ease;
 }
 
-/* ADD CART */
+
 .add-cart {
   background: #111;
   color: #fff;
@@ -131,6 +132,21 @@
 
 .add-cart:hover {
   background: #333;
+}
+.go-to-bag {
+  background: #111;
+  color: #fff;
+  padding: 14px 22px;
+  border-radius: 10px;
+  border: none;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.go-to-bag:hover {
+  background: #111;
 }
 
 /* BUY NOW */
